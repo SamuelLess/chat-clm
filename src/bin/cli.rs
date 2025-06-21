@@ -137,8 +137,7 @@ fn eval_model(model_name: &str) {
     let (model_files, chosen_model) = load_model(model_name);
     if let Some(file_name) = chosen_model {
         let path = format!("{}{}", MODEL_PATH, file_name);
-        let (mut model, tokenizer) = chatclm::clm::load(&path);
-        model.options.regularization = 0.15;
+        let (model, tokenizer) = chatclm::clm::load(&path);
         let test_text = read_file(&model.options.test_file);
         // evaluate the model
         let stats = chatclm::clm::evaluate::evaluate(&model, test_text.clone(), &tokenizer);
